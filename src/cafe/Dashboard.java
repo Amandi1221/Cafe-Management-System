@@ -1784,17 +1784,17 @@ public final class Dashboard extends javax.swing.JFrame {
         } else {
             jTextArea1.setText(jTextArea1.getText()
                     + "\n***************************************************\n"
-                    + "Tax: \t\t\t" + tax + "\n"
-                    + "sub Total: \t\t\t" + total + "\n"
-                    + "Total: \t\t\t" + (total + tax) + "\n\n"
-                    + "\"*******************Thank You*******************\n"
+                    + "Tax: \t\t\t" + String.format("%.2f", tax) + "\n"
+                    + "sub Total: \t\t\t" + String.format("%.2f", total) + "\n"
+                    + "Total: \t\t\t" + String.format("%.2f", (total + tax)) + "\n\n"
+                    + "*******************Thank You*******************\n"
             );
             btnTotal.setEnabled(false);
         }
     }//GEN-LAST:event_btnTotalActionPerformed
 
-    public void getTax(int t) {
-        if (t <= 10.0 && t <= 20.0) {
+    public void getTax(double t) {
+        if (t > 0 && t <= 20.0) {
             tax = 0.5;
         } else if (t > 20.0 && t <= 40.0) {
             tax = 1.0;
@@ -1810,6 +1810,8 @@ public final class Dashboard extends javax.swing.JFrame {
             tax = 10.0;
         } else if (t > 200.0) {
             tax = 15.0;
+        } else {
+            tax = 0.0;
         }
     }
 
@@ -1825,26 +1827,26 @@ public final class Dashboard extends javax.swing.JFrame {
         int purchaseId = 16200 + (int) (Math.random() * 90900);
         jTextArea1.setText("""
                            *******************Espresso Lane*******************
-                           Time:""" + jTxtTime.getText() + " Date: " + jTxtDate.getText() + "\n"
-                                   +"Purchased Id:" + purchaseId + "\n"
+                           Time: """ + jTxtTime.getText() + " Date: " + jTxtDate.getText() + "\n"
+                                   + "Purchase ID: " + purchaseId + "\n"
                 + "***************************************************\n" 
                                    + "Item Name:\t\t\t" + "Price(Rs)\n");
     }
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
         int qty = Integer.parseInt(jSpinner2.getValue().toString());
-        if (!qtyIsZero(qty) || !jCheckBox2.isSelected()) {
-            jCheckBox2.setSelected(false);
-        } else {
+        if (qtyIsZero(qty) && jCheckBox2.isSelected()) {
             x++;
             if (x == 1) {
                 espressoLane();
             }
             double price = qty * 350;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel14.getText() + "\t\t" + price + "\n");
             dudate();
+        } else {
+            jCheckBox2.setSelected(false);
         }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
@@ -1857,7 +1859,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 550;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel20.getText() + "\t\t\t" + price + "\n");
             dudate();
         } else {
@@ -1874,7 +1876,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 480;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel26.getText() + "\t\t\t" + price + "\n");
             dudate();
         } else {
@@ -1891,7 +1893,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 400;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel38.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -1908,7 +1910,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 200;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel44.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -1925,7 +1927,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 350;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel50.getText() + "\t\t\t" + price + "\n");
             dudate();
         } else {
@@ -1942,7 +1944,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 790;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel56.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -1959,7 +1961,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 750;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel32.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -1976,7 +1978,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 600;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel68.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -1993,7 +1995,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 300;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel62.getText() + "\t\t\t" + price + "\n");
             dudate();
         } else {
@@ -2010,7 +2012,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 650;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel74.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -2027,7 +2029,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 250;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel80.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -2044,7 +2046,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 350;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel86.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -2061,7 +2063,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 300;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel92.getText() + "\t\t" + price + "\n");
             dudate();
         } else {
@@ -2078,7 +2080,7 @@ public final class Dashboard extends javax.swing.JFrame {
             }
             double price = qty * 300;
             total += price;
-            getTax((int) total);
+            getTax(total);
             jTextArea1.setText(jTextArea1.getText() + x + ". " + jLabel98.getText() + "\t\t\t" + price + "\n");
             dudate();
         } else {

@@ -4,8 +4,10 @@
  */
 package cafe.management;
 
+import cafe.Dashboard;
+
 /**
- *
+ * Main entry point for Cafe Management application.
  * @author DELL
  */
 public class CafeManagement {
@@ -14,7 +16,12 @@ public class CafeManagement {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Dashboard().setVisible(true);
+            }
+        });
     }
-    
 }
+
